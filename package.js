@@ -1,7 +1,7 @@
 /* globals Package, Npm */
 Package.describe({
   name: 'justinr1234:lib',
-  version: '0.0.19',
+  version: '0.0.20',
   summary: 'justinr1234 Lib',
   documentation: 'README.md',
   git: 'https://github.com/justinr1234/justinr1234-lib',
@@ -26,6 +26,7 @@ Package.onUse(api => {
   api.use('accounts-ui@1.1.9');
   api.use('templating@1.3.2', 'client');
   api.use('kadira:flow-router@2.12.1');
+  api.use('kadira:blaze-layout@2.3.0');
   api.use('accounts-password@1.3.6');
   api.use('useraccounts:flow-routing@1.14.2');
   api.use('useraccounts:semantic-ui@1.14.2', 'client');
@@ -44,8 +45,7 @@ Package.onUse(api => {
 });
 
 Package.onTest(api => {
-  api.use('justinr1234:lib');
-  api.use('practicalmeteor:chai');
-  api.use('practicalmeteor:mocha');
-  api.use('dispatch:mocha');
+  api.use('justinr1234:lib', 'server');
+  api.use('practicalmeteor:chai', 'server');
+  api.use('practicalmeteor:mocha', 'server');
 });

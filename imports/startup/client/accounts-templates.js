@@ -44,6 +44,7 @@ AccountsTemplates.configureRoute('signUp', {
   name: 'SignUp',
   path: Router.routeMap.APP_REGISTER.path,
   template: 'APP_REGISTER',
+  redirect: successfulSignInRedirect,
 });
 // // AccountsTemplates.configureRoute('verifyEmail');
 
