@@ -109,7 +109,7 @@ const groupMapReducer = (map, g, { group }) => {
     var groupInfo = routes[0];
 
     g[group] = {
-        groupInfo: _.omit(groupInfo, ['roles', 'authRequired', 'triggersEnter']) //TODO allow group level triggers, currently it interferes with route level triggers
+        groupInfo: _.omit(groupInfo, ['roles', 'authRequired'])
     };
 
     var groupRoutes = [];
@@ -121,10 +121,6 @@ const groupMapReducer = (map, g, { group }) => {
             routeTriggers.push(function() {
                 var route;
                 if (!(Meteor.loggingIn() || Meteor.userId())) {
-                    route = FlowRouter.current();
-                    if (route.route.name !== 'login') {
-                        Session.set('redirectAfterLogin', route.path);
-                    }
                     return FlowRouter.go('APP_LOGIN');
                 }
             })
@@ -146,7 +142,7 @@ const groupMapReducer = (map, g, { group }) => {
         route.triggersEnter = routeTriggers;
 
         // remove the unconventional flowrouter keys and add to group routes
-        groupRoutes.push(_.omit(route, ['roles', 'authRequired']));
+        groupRoutes.push(route);
     });
 
     g[group]['routes'] = groupRoutes; //set the routes for this group
