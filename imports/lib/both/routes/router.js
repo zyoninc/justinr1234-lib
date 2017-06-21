@@ -40,18 +40,11 @@ export class JustinRouter {
       routesByGroup,
     } = transformRoutesJsonToRouteObject(routes);
 
-    const _routes = insertAtFront
-      ? mergeRoutes(routes, this._routes.get())
-      : mergeRoutes(this._routes.get(), routes);
-    const _routeMap = insertAtFront
-      ? mergeRouteMap(routeMap, this._routeMap.get())
-      : mergeRouteMap(this._routeMap.get(), routeMap);
-    const _routeGroups = insertAtFront
-      ? mergeRouteGroups(routeGroups, this._routeGroups.get())
-      : mergeRouteGroups(this._routeGroups.get(), routeGroups);
-    const _routesByGroup = insertAtFront
-      ? mergeRoutesByGroup(routesByGroup, this._routesByGroup.get())
-      : mergeRoutesByGroup(this._routesByGroup.get(), routesByGroup);
+    const _routes = insertAtFront ? mergeRoutes(routes, this._routes.get()) : mergeRoutes(this._routes.get(), routes);
+    const _routeMap = insertAtFront ? mergeRouteMap(routeMap, this._routeMap.get()) : mergeRouteMap(this._routeMap.get(), routeMap);
+    const _routeGroups = insertAtFront ? mergeRouteGroups(routeGroups, this._routeGroups.get()) : mergeRouteGroups(this._routeGroups.get(), routeGroups);
+    const _routesByGroup = insertAtFront ? mergeRoutesByGroup(routesByGroup, this._routesByGroup.get()) : mergeRoutesByGroup(this._routesByGroup.get(), routesByGroup);
+
     this._routeMap.set(_routeMap);
     this._routeGroups.set(_routeGroups);
     this._routesByGroup.set(_routesByGroup);
@@ -59,9 +52,7 @@ export class JustinRouter {
 
     // TODO: Merge routes and save?
     const existingRoutes = this._flowRouterRoutes.get();
-    this._flowRouterRoutes.set(insertAtFront
-      ? [...createFlowRouterRoutes(routesByGroup), ...existingRoutes]
-      : [...existingRoutes, ...createFlowRouterRoutes(routesByGroup)]);
+    this._flowRouterRoutes.set(insertAtFront ? [...createFlowRouterRoutes(routesByGroup), ...existingRoutes] : [...existingRoutes, ...createFlowRouterRoutes(routesByGroup)]);
   }
   constructor(_routes = {}) {
     this._routeMap = new ReactiveVar({});

@@ -1,6 +1,8 @@
 /* global AccountsTemplates  */
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Router } from 'meteor/justinr1234:lib';
+import { Roles } from 'meteor/alanning:roles';
+import { Tracker } from 'meteor/tracker';
 
 const onLogoutHook = () => FlowRouter.go('/');
 
@@ -124,4 +126,14 @@ AccountsTemplates.addField({
     return '';
   },
   errStr: 'Invalid Phone number!',
+});
+
+// Wait to initialize FlowRouter until...
+FlowRouter.wait();
+
+Tracker.autorun(function() {
+  // Ensure Roles subscription is ready before initializing FlowRouter
+  if (Roles.subscription.ready() && !FlowRouter._initialized) {
+    return FlowRouter.initialize();
+  }
 });

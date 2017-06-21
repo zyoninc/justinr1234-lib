@@ -12,6 +12,9 @@ export const routes = {
   APP_REGISTER: {
     path: '/register',
   },
+  NO_PERMISSION: {
+    path: '/no-permission',
+  }
 };
 
 Router.addRoutes(routes);
